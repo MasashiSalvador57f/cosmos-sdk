@@ -8,6 +8,9 @@ BREAKING CHANGES
   * [gaia-lite] [\#3056](https://github.com/cosmos/cosmos-sdk/pull/3056) `generate_only` and `simulate` have moved from query arguments to POST requests body.
 
 * Gaia CLI  (`gaiacli`)
+  * [\#810](https://github.com/cosmos/cosmos-sdk/issues/810) Don't fallback to any default values for chain ID.
+    - Users need to supply chain ID either via config file or the `--chain-id` flag.
+    - Change `chain_id` and `trust_node` in `gaiacli` configuration to `chain-id` and `trust-node` respectively.
 
 * Gaia
 
