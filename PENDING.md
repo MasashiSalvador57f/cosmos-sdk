@@ -38,6 +38,8 @@ IMPROVEMENTS
 
 * Tendermint
 
+* CI
+    - [#142](https://github.com/tendermint/devops/issues/142) Updated CircleCI job to improve readability
 
 BUG FIXES
 
