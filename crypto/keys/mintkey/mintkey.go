@@ -106,7 +106,9 @@ func EncryptArmorPrivKey(privKey crypto.PrivKey, passphrase string) string {
 // encrypted priv key.
 func encryptPrivKey(privKey crypto.PrivKey, passphrase string) (saltBytes []byte, encBytes []byte) {
 	saltBytes = crypto.CRandBytes(16)
-	key, err := bcrypt.GenerateFromPassword(saltBytes, []byte(passphrase), BcryptSecurityParameter)
+	saltAndPassphrase := []byte{}
+	saltAndPassphrase = append(saltBytes, []byte(passphrase)...)
+	key, err := bcrypt.GenerateFromPassword(saltAndPassphrase, BcryptSecurityParameter)
 	if err != nil {
 		cmn.Exit("Error generating bcrypt key from passphrase: " + err.Error())
 	}
@@ -140,7 +142,9 @@ func UnarmorDecryptPrivKey(armorStr string, passphrase string) (crypto.PrivKey, 
 }
 
 func decryptPrivKey(saltBytes []byte, encBytes []byte, passphrase string) (privKey crypto.PrivKey, err error) {
-	key, err := bcrypt.GenerateFromPassword(saltBytes, []byte(passphrase), BcryptSecurityParameter)
+	saltAndPassphrase := []byte{}
+	saltAndPassphrase = append(saltBytes, []byte(passphrase)...)
+	key, err := bcrypt.GenerateFromPassword(saltAndPassphrase, BcryptSecurityParameter)
 	if err != nil {
 		cmn.Exit("Error generating bcrypt key from passphrase: " + err.Error())
 	}
